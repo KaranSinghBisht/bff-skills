@@ -1,0 +1,288 @@
+{
+  "generated": "2026-04-14T20:01:25.675Z",
+  "source": "BitflowFinance/bff-skills",
+  "count": 15,
+  "skills": [
+    {
+      "name": "agent-trust-ledger",
+      "description": "Writes on-chain reputation between AIBTC agents via ERC-8004 reputation-registry-v2 — client approvals, feedback ratings, and owner responses for completed agent transactions.",
+      "metadata": {
+        "author": "KaranSinghBisht",
+        "author-agent": "Encrypted Zara",
+        "user-invocable": "false",
+        "arguments": "doctor | install-packs | status | approve-client | submit-feedback | respond | run",
+        "entry": "agent-trust-ledger/agent-trust-ledger.ts",
+        "requires": "wallet, signing, settings",
+        "tags": "write, mainnet-only, sensitive, infrastructure, l2"
+      },
+      "directory": "agent-trust-ledger",
+      "files": [
+        "AGENT.md",
+        "SKILL.md",
+        "agent-trust-ledger.ts"
+      ]
+    },
+    {
+      "name": "dca",
+      "description": "Dollar Cost Averaging (DCA) for Stacks DeFi — automate recurring buys or sells of any Bitflow token pair via direct swaps. The agent executes each order on schedule with mandatory confirmation, slippage guardrails, balance checks, full tx logging, and Telegram-friendly status summaries. HODLMM pairs supported automatically via SDK route resolver with optional explicit HODLMM-only mode.",
+      "metadata": {
+        "author": "k9dreamermacmini-coder",
+        "author-agent": "Graphite Elan",
+        "user-invocable": "false",
+        "arguments": "doctor | install-packs | setup | plan | run | status | cancel | list",
+        "entry": "dca/dca.ts",
+        "requires": "wallet",
+        "tags": "defi, write, mainnet-only, requires-funds, l2"
+      },
+      "directory": "dca",
+      "files": [
+        "AGENT.md",
+        "dca.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "defi-portfolio-scanner",
+      "description": "Cross-protocol DeFi position aggregator for Stacks wallets — 5 parallel scanners covering Bitflow HODLMM LP bins, Zest lending/borrowing (V2 pool-borrow-v2-3), ALEX pool shares, Styx bridge deposits, and Hiro wallet balances. Produces a unified portfolio view with USD estimation (CoinGecko) and risk scoring.",
+      "metadata": {
+        "author": "azagh72-creator",
+        "author-agent": "Flying Whale",
+        "user-invocable": "false",
+        "arguments": "doctor | scan --address <stx-address> | summary --address <stx-address>",
+        "entry": "defi-portfolio-scanner/defi-portfolio-scanner.ts",
+        "tags": "defi, read-only, mainnet-only, l2"
+      },
+      "directory": "defi-portfolio-scanner",
+      "files": [
+        "AGENT.md",
+        ".gitignore",
+        "package.json",
+        "defi-portfolio-scanner.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "hermetica-yield-rotator",
+      "description": "Cross-protocol yield rotator for Stacks mainnet. Monitors Hermetica USDh staking APY vs Bitflow HODLMM dlmm_1 APR from live on-chain data, assesses wallet position, and executes yield rotation between protocols when the differential exceeds a configurable threshold. Write-capable: outputs MCP commands for stake, initiate-unstake, complete-unstake, and cross-protocol rotate actions.",
+      "metadata": {
+        "author": "cliqueengagements",
+        "author-agent": "Micro Basilisk (Agent 77) — SP219TWC8G12CSX5AB093127NC82KYQWEH8ADD1AY | bc1qzh2z92dlvccxq5w756qppzz8fymhgrt2dv8cf5",
+        "user-invocable": "true",
+        "arguments": "doctor | install-packs | run [--wallet <STX_ADDRESS>] [--action <assess|stake|initiate-unstake|complete-unstake|rotate>] [--amount <usdh>] [--confirm]",
+        "entry": "hermetica-yield-rotator/hermetica-yield-rotator.ts",
+        "tags": "defi, hermetica, usdh, staking, bitflow, yield, rotation, actions, mainnet-only, l2"
+      },
+      "directory": "hermetica-yield-rotator",
+      "files": [
+        "AGENT.md",
+        "SKILL.md",
+        "hermetica-yield-rotator.ts"
+      ]
+    },
+    {
+      "name": "hodlmm-bin-guardian",
+      "description": "Monitors Bitflow HODLMM bins to keep LP positions in the active earning range. Fetches live pool state via Bitflow's HODLMM app API, checks if a wallet's position is in-range, computes slippage from Bitflow-native price data, and outputs a JSON recommendation. Read-only — rebalance actions require explicit human approval.",
+      "metadata": {
+        "author": "cliqueengagements",
+        "author-agent": "Micro Basilisk (Agent 77) — SP219TWC8G12CSX5AB093127NC82KYQWEH8ADD1AY | bc1qzh2z92dlvccxq5w756qppzz8fymhgrt2dv8cf5",
+        "user-invocable": "true",
+        "arguments": "doctor | install-packs | run [--wallet <STX_ADDRESS>] [--pool-id <id>]",
+        "entry": "hodlmm-bin-guardian/hodlmm-bin-guardian.ts",
+        "tags": "defi, read-only, mainnet-only, l2"
+      },
+      "directory": "hodlmm-bin-guardian",
+      "files": [
+        "AGENT.md",
+        "hodlmm-bin-guardian.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "hodlmm-move-liquidity",
+      "description": "HODLMM Move-Liquidity & Auto-Rebalancer — withdraw from drifted bins, re-deposit around the current active bin. Includes autonomous monitoring loop.",
+      "metadata": {
+        "author": "cliqueengagements",
+        "author-agent": "Micro Basilisk (Agent 77) — SP219TWC8G12CSX5AB093127NC82KYQWEH8ADD1AY | bc1qzh2z92dlvccxq5w756qppzz8fymhgrt2dv8cf5",
+        "user-invocable": "false",
+        "arguments": "doctor | scan | run | auto | install-packs",
+        "entry": "hodlmm-move-liquidity/hodlmm-move-liquidity.ts",
+        "requires": "wallet, signing",
+        "tags": "defi, write, mainnet-only, requires-funds"
+      },
+      "directory": "hodlmm-move-liquidity",
+      "files": [
+        "AGENT.md",
+        "hodlmm-move-liquidity.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "hodlmm-pulse",
+      "description": "Fee velocity and volume momentum tracker for Bitflow HODLMM pools — detects entry windows by comparing today's fee capture against the 7-day baseline, building a local time-series to surface trend direction (accelerating, stable, cooling).",
+      "metadata": {
+        "author": "ghislo749",
+        "author-agent": "Grim Seraph",
+        "user-invocable": "false",
+        "arguments": "doctor | scan | track | report",
+        "entry": "hodlmm-pulse/hodlmm-pulse.ts",
+        "tags": "defi, read-only, mainnet-only, l2, infrastructure"
+      },
+      "directory": "hodlmm-pulse",
+      "files": [
+        "AGENT.md",
+        "hodlmm-pulse.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "hodlmm-range-keeper",
+      "description": "Active HODLMM position manager that monitors bin drift, estimates accrued fees, and re-centers liquidity around the active bin when profitable.",
+      "metadata": {
+        "author": "tearful-saw",
+        "author-agent": "Elegant Orb",
+        "user-invocable": "false",
+        "arguments": "doctor | status | plan | recenter | run | history | install-packs",
+        "entry": "hodlmm-range-keeper/hodlmm-range-keeper.ts",
+        "requires": "wallet, signing, settings",
+        "tags": "defi, write, mainnet-only, requires-funds, l2"
+      },
+      "directory": "hodlmm-range-keeper",
+      "files": [
+        "AGENT.md",
+        "hodlmm-range-keeper.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "hodlmm-risk",
+      "description": "HODLMM volatility risk monitor — reads Bitflow HODLMM pool state, computes current-state volatility proxy from bin distribution, scores regime (calm/elevated/crisis), and emits position-sizing or liquidity-pull signals for LP agents. Read-only; no wallet required.",
+      "metadata": {
+        "author": "locallaunchsc-cloud",
+        "author-agent": "Risk Sentinel",
+        "user-invocable": "false",
+        "arguments": "assess-pool | assess-position | regime-snapshot",
+        "entry": "hodlmm-risk/hodlmm-risk.ts",
+        "tags": "l2, defi, read-only, mainnet-only"
+      },
+      "directory": "hodlmm-risk",
+      "files": [
+        "AGENT.md",
+        "hodlmm-risk.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "hodlmm-signal-allocator",
+      "description": "Signal-gated HODLMM yield allocator. Reads aibtc.news signals and Quantum Readiness Index alongside live HODLMM APR to compute a risk-adjusted yield score, then executes a Bitflow swap to prepare wallet for HODLMM deposit when conditions align.",
+      "metadata": {
+        "author": "IamHarrie-Labs",
+        "author-agent": "Serene Spring",
+        "user-invocable": "false",
+        "arguments": "doctor | scan --pool <id> --wallet <stx-addr> | run --pool <id> --wallet <stx-addr> --amount-stx <n> [--confirm] [--dry-run]",
+        "entry": "hodlmm-signal-allocator/hodlmm-signal-allocator.ts",
+        "tags": "defi, write, mainnet-only, requires-funds, l2"
+      },
+      "directory": "hodlmm-signal-allocator",
+      "files": [
+        "AGENT.md",
+        "hodlmm-signal-allocator.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "jingswap-cycle-agent",
+      "description": "JingSwap STX↔sBTC cycle monitor and participation agent. Reads live cycle state and prices directly from the Stacks contract via Hiro API and Pyth oracle — no API key required. Outputs PARTICIPATE / MONITOR / WAIT_FOR_DEPOSIT_PHASE / NO_SBTC_AVAILABLE with oracle-vs-DEX discount analysis.",
+      "metadata": {
+        "author": "teflonmusk",
+        "author-agent": "Dual Cougar",
+        "user-invocable": "false",
+        "arguments": "doctor | status | analyze | participate",
+        "entry": "jingswap-cycle-agent/jingswap-cycle-agent.ts",
+        "requires": "jingswap_deposit_stx (aibtc MCP) for live execution",
+        "tags": "jingswap, sbtc, stx, defi, execution, mainnet-only, stacks, bitflow"
+      },
+      "directory": "jingswap-cycle-agent",
+      "files": [
+        "AGENT.md",
+        "SKILL.md",
+        "jingswap-cycle-agent.ts"
+      ]
+    },
+    {
+      "name": "sbtc-auto-funnel",
+      "description": "Monitor sBTC balance and auto-route excess above a reserve threshold to Zest yield",
+      "metadata": {
+        "author": "secret-mars",
+        "author-agent": "Secret Mars",
+        "user-invocable": "false",
+        "arguments": "doctor | run --action=check | run --action=funnel | install-packs",
+        "entry": "sbtc-auto-funnel/sbtc-auto-funnel.ts",
+        "requires": "wallet, signing",
+        "tags": "defi, yield, sbtc, zest, automation"
+      },
+      "directory": "sbtc-auto-funnel",
+      "files": [
+        "AGENT.md",
+        "SKILL.md",
+        "sbtc-auto-funnel.ts"
+      ]
+    },
+    {
+      "name": "sbtc-yield-maximizer",
+      "description": "Routes idle sBTC to the highest safe live yield path and executes capped Zest supply when Zest is the best current route.",
+      "metadata": {
+        "author": "Ololadestephen",
+        "author-agent": "Wide Eden",
+        "user-invocable": "false",
+        "arguments": "doctor | install-packs | status | run",
+        "entry": "sbtc-yield-maximizer/sbtc-yield-maximizer.ts",
+        "requires": "wallet, signing, settings",
+        "tags": "defi, write, mainnet-only, requires-funds, l2"
+      },
+      "directory": "sbtc-yield-maximizer",
+      "files": [
+        "AGENT.md",
+        "sbtc-yield-maximizer.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "zest-auto-repay",
+      "description": "Autonomous Zest Protocol LTV guardian — monitors borrowing positions, detects liquidation risk, and executes safe repayments with enforced spend limits to protect collateral on Stacks mainnet.",
+      "metadata": {
+        "author": "azagh72-creator",
+        "author-agent": "Flying Whale",
+        "user-invocable": "false",
+        "arguments": "doctor | run --action=status | run --action=monitor | run --action=repay | run --action=emergency-repay",
+        "entry": "zest-auto-repay/zest-auto-repay.ts",
+        "requires": "wallet, signing, settings",
+        "tags": "defi, write, mainnet-only, requires-funds, l2"
+      },
+      "directory": "zest-auto-repay",
+      "files": [
+        "AGENT.md",
+        "zest-auto-repay.ts",
+        "SKILL.md"
+      ]
+    },
+    {
+      "name": "zest-yield-manager",
+      "description": "Autonomous sBTC yield management on Zest Protocol — supply, withdraw, claim rewards, and monitor positions with safety controls.",
+      "metadata": {
+        "author": "secret-mars",
+        "author-agent": "Secret Mars",
+        "user-invocable": "true",
+        "arguments": "doctor | run | install-packs",
+        "entry": "zest-yield-manager/zest-yield-manager.ts",
+        "requires": "wallet, signing, settings",
+        "tags": "defi, write, mainnet-only, requires-funds, l2"
+      },
+      "directory": "zest-yield-manager",
+      "files": [
+        "AGENT.md",
+        "zest-yield-manager.ts",
+        "SKILL.md"
+      ]
+    }
+  ]
+}
