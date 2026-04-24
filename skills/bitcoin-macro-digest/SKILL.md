@@ -106,6 +106,23 @@ bun run skills/bitcoin-macro-digest/bitcoin-macro-digest.ts tickers
 }
 ```
 
+## Output contract
+
+- `stdout` is machine-parseable JSON for every command (`doctor`, `digest`, `filings`, `tickers`). No prose, no color codes, no progress bars on stdout.
+- `stderr` carries per-ticker warnings (e.g. transient `HTTP 403` / `ECONNRESET`) so stdout remains consumable by downstream tools.
+- Exit codes: `0` on success, `1` on network/SEC failure, `2` on CLI misuse (unknown command, bad flags).
+- Ordering: `digest.filings[]` is sorted `filingDate` descending, then accession-number descending for same-day ties. Stable across repeat calls on identical data.
+- Timezone: `filingDate` is the SEC-reported calendar date (ET), formatted `YYYY-MM-DD`. Callers wanting UTC must derive it from the accession URL.
+- Backwards compatibility: adding tickers to `TICKER_CIKS` is non-breaking; removing is breaking. Any field in the output records is stable within minor versions.
+
+## Safety notes
+
+- **SEC fair-use**: do not parallelize ticker fetches without a token bucket. The skill uses a 1.1s serial delay by default; raising throughput requires coordination with SEC (risk of User-Agent ban).
+- **No financial advice**: output is raw filing metadata. Interpretation (insider-buying vs. vesting, bullish vs. bearish) is the agent's responsibility.
+- **No deserialization of filing bodies**: the skill only returns URLs; fetching and parsing the actual filing content can expose the agent to untrusted HTML/XBRL. Use a hardened parser downstream.
+- **No state mutation**: this is a read-only skill. It does not sign, broadcast, or interact with any on-chain contract. Safe to invoke at any cooldown state.
+- **Rate-limit observability**: if `stderr` shows repeated `HTTP 403`, stop immediately and rotate the `SEC_UA_EMAIL` — an invalid / placeholder email is the common cause.
+
 ## Ethics + SEC compliance
 
 - Uses compliant `User-Agent` header with contact email (SEC rule).
